@@ -36,7 +36,7 @@ router.post('/contact',function(req,res,next){
     const msg = {
         to: "justblankb@gmail.com",
         from: req.body.email,
-        subject: req.body.subject,
+        subject:"("+req.body.fname+" "+req.body.lname+")"+req.body.subject,
         text: req.body.body,
     };
     sgMail.send(msg);
@@ -44,7 +44,7 @@ router.post('/contact',function(req,res,next){
         to: req.body.email,
         from: "justblankb@gmail.com",
         subject: req.body.subject,
-        text:"Thank you for choosing us.",
+        text:"Hello,"+req.body.fname+" "+req.body.lname+".Thank you for choosing us.",
     };
     sgMail.send(msg2);
     res.send("<html><link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'><script>alert('Please check your email..!!')</script><a href='http://localhost:3000/'><i class='material-icons'>arrow_back</i></a></html>");
