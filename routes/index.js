@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const sgMail = require('@sendgrid/mail');
+var dotenv = require('dotenv');
+dotenv.config();
 
 router.get('/',function(req,res,next){
+    console.log(process.env.API_KEY)
   res.redirect('/home');
 });
 
@@ -30,7 +33,7 @@ router.get('/gallery',function(req,res,next){
 });
 
 router.post('/contact',function(req,res,next){
-    sgMail.setApiKey("");
+    sgMail.setApiKey(process.env.API_KEY);
     const msg = {
         to: "justblankb@gmail.com",
         from: req.body.email,
