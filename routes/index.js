@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const sgMail = require('@sendgrid/mail');
 
-<<<<<<< HEAD
 router.get('/',function(req,res,next){
   res.redirect('/home');
 });
@@ -28,14 +27,6 @@ router.get('/legality',function(req,res,next){
 });
 router.get('/gallery',function(req,res,next){
 	res.render('gallery');
-=======
-router.get('/', function(req, res, next) {
- 	res.render('index');
-});
-
-router.get('/contact',function(req,res,next){
-	res.render('contact');
->>>>>>> d42f764bfc397b13e3fcf23ff7d700014899d25c
 });
 
 router.post('/contact',function(req,res,next){

@@ -13,10 +13,7 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
-<<<<<<< HEAD
     "mongoose": "^5.0.12",
-=======
->>>>>>> d42f764bfc397b13e3fcf23ff7d700014899d25c
     "morgan": "~1.9.0",
     "nodemon": "^1.17.2",
     "serve-favicon": "~2.4.5"

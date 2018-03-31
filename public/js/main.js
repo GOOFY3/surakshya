@@ -4,628 +4,183 @@
 
 
 
-	// iPad and iPod detection	
-	var isiPad = function(){
-		return (navigator.platform.indexOf("iPad") != -1);
+	var isMobile = {
+		Android: function() {
+			return navigator.userAgent.match(/Android/i);
+		},
+			BlackBerry: function() {
+			return navigator.userAgent.match(/BlackBerry/i);
+		},
+			iOS: function() {
+			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+		},
+			Opera: function() {
+			return navigator.userAgent.match(/Opera Mini/i);
+		},
+			Windows: function() {
+			return navigator.userAgent.match(/IEMobile/i);
+		},
+			any: function() {
+			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+		}
 	};
 
-	var isiPhone = function(){
-	    return (
-			(navigator.platform.indexOf("iPhone") != -1) || 
-			(navigator.platform.indexOf("iPod") != -1)
-	    );
+	var fullHeight = function() {
+
+		if ( !isMobile.any() ) {
+			$('.js-fullheight').css('height', $(window).height());
+			$(window).resize(function(){
+				$('.js-fullheight').css('height', $(window).height());
+			});
+		}
+
 	};
 
-	// Parallax
-	var parallax = function() {
-		$(window).stellar();
+
+	var centerBlock = function() {
+		$('.fh5co-section-with-image .fh5co-box').css('margin-top', -($('.fh5co-section-with-image .fh5co-box').outerHeight()/2));
+	  	$(window).resize(function(){
+	  		$('.fh5co-section-with-image .fh5co-box').css('margin-top', -($('.fh5co-section-with-image .fh5co-box').outerHeight()/2));
+	  	});
+	};
+
+	var responseHeight = function() {
+		setTimeout(function(){
+			$('.js-responsive > .v-align').css('height', $('.js-responsive > img').height());
+		}, 1);
+		
+		$(window).resize(function(){
+			setTimeout(function(){
+				$('.js-responsive > .v-align').css('height', $('.js-responsive > img').height());
+			}, 1);
+		})
 	};
 
 
+	var mobileMenuOutsideClick = function() {
 
-	// Burger Menu
+		$(document).click(function (e) {
+	    var container = $("#fh5co-offcanvas, .js-fh5co-nav-toggle");
+	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+
+	    	if ( $('body').hasClass('offcanvas-visible') ) {
+
+    			$('body').removeClass('offcanvas-visible');
+    			$('.js-fh5co-nav-toggle').removeClass('active');
+				
+	    	}
+	    
+	    	
+	    }
+		});
+
+	};
+
+
+	var offcanvasMenu = function() {
+		$('body').prepend('<div id="fh5co-offcanvas" />');
+		$('#fh5co-offcanvas').prepend('<ul id="fh5co-side-links">');
+		$('body').prepend('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>');
+		$('#fh5co-offcanvas').append($('#fh5co-header nav').clone());
+	};
+
+
 	var burgerMenu = function() {
 
 		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
+			var $this = $(this);
 
+			$('body').toggleClass('fh5co-overflow offcanvas-visible');
+			$this.toggleClass('active');
 			event.preventDefault();
 
-			if ( $('#navbar').is(':visible') ) {
-				$(this).removeClass('active');
-			} else {
-				$(this).addClass('active');	
+		});
+
+		$(window).resize(function() {
+			if ( $('body').hasClass('offcanvas-visible') ) {
+		   	$('body').removeClass('offcanvas-visible');
+		   	$('.js-fh5co-nav-toggle').removeClass('active');
+		   }
+		});
+
+		$(window).scroll(function(){
+			if ( $('body').hasClass('offcanvas-visible') ) {
+		   	$('body').removeClass('offcanvas-visible');
+		   	$('.js-fh5co-nav-toggle').removeClass('active');
+		   }
+		});
+
+	};
+
+
+	var toggleBtnColor = function() {
+		if ( $('#fh5co-hero').length > 0 ) {	
+			$('#fh5co-hero').waypoint( function( direction ) {
+				if( direction === 'down' ) {
+					$('.fh5co-nav-toggle').addClass('dark');
+				}
+			} , { offset: - $('#fh5co-hero').height() } );
+
+			$('#fh5co-hero').waypoint( function( direction ) {
+				if( direction === 'up' ) {
+					$('.fh5co-nav-toggle').removeClass('dark');
+				}
+			} , { 
+				offset:  function() { return -$(this.element).height() + 0; }
+			} );
+		}
+	};
+
+
+
+	var contentWayPoint = function() {
+		var i = 0;
+		$('.animate-box').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
+				
+				i++;
+
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
+
+					$('body .animate-box.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data('animate-effect');
+							if ( effect === 'fadeIn') {
+								el.addClass('fadeIn animated');
+							} else if ( effect === 'fadeInLeft') {
+								el.addClass('fadeInLeft animated');
+							} else if ( effect === 'fadeInRight') {
+								el.addClass('fadeInRight animated');
+							} else {
+								el.addClass('fadeInUp animated');
+							}
+
+							el.removeClass('item-animate');
+						},  k * 200, 'easeInOutExpo' );
+					});
+					
+				}, 100);
+				
 			}
 
-			
-			
-		});
-
-	};
-
-
-	var testimonialCarousel = function(){
-		var owl = $('.owl-carousel-fullwidth');
-		owl.owlCarousel({
-			items: 1,
-			loop: true,
-			margin: 0,
-			responsiveClass: true,
-			nav: false,
-			dots: true,
-			smartSpeed: 500,
-			autoHeight: true
-		});
-	};
-
-	// Page Nav
-	var clickMenu = function() {
-
-		$('#navbar a:not([class="external"])').click(function(event){
-			var section = $(this).data('nav-section'),
-				navbar = $('#navbar');
-
-				if ( $('[data-section="' + section + '"]').length ) {
-			    	$('html, body').animate({
-			        	scrollTop: $('[data-section="' + section + '"]').offset().top - 55
-			    	}, 500);
-			   }
-
-		    if ( navbar.is(':visible')) {
-		    	navbar.removeClass('in');
-		    	navbar.attr('aria-expanded', 'false');
-		    	$('.js-fh5co-nav-toggle').removeClass('active');
-		    }
-
-		    event.preventDefault();
-		    return false;
-		});
-
-
-	};
-
-	// Reflect scrolling in navigation
-	var navActive = function(section) {
-
-		var $el = $('#navbar > ul');
-		$el.find('li').removeClass('active');
-		$el.each(function(){
-			$(this).find('a[data-nav-section="'+section+'"]').closest('li').addClass('active');
-		});
-
-	};
-
-	var navigationSection = function() {
-
-		var $section = $('section[data-section]');
-		
-		$section.waypoint(function(direction) {
-		  	
-		  	if (direction === 'down') {
-		    	navActive($(this.element).data('section'));
-		  	}
-		}, {
-	  		offset: '150px'
-		});
-
-		$section.waypoint(function(direction) {
-		  	if (direction === 'up') {
-		    	navActive($(this.element).data('section'));
-		  	}
-		}, {
-		  	offset: function() { return -$(this.element).height() + 155; }
-		});
-
-	};
-
-	// Window Scroll
-	var windowScroll = function() {
-		var lastScrollTop = 0;
-
-		$(window).scroll(function(event){
-
-		   	var header = $('#fh5co-header'),
-				scrlTop = $(this).scrollTop();
-
-			if ( scrlTop > 500 && scrlTop <= 2000 ) {
-				header.addClass('navbar-fixed-top fh5co-animated slideInDown');
-			} else if ( scrlTop <= 500) {
-				if ( header.hasClass('navbar-fixed-top') ) {
-					header.addClass('navbar-fixed-top fh5co-animated slideOutUp');
-					setTimeout(function(){
-						header.removeClass('navbar-fixed-top fh5co-animated slideInDown slideOutUp');
-					}, 100 );
-				}
-			} 
-			
-		});
-	};
-
-
-	// Animations
-	// Home
-	var homeAnimate = function() {
-		if ( $('#fh5co-home').length > 0 ) {	
-
-			$('#fh5co-home').waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						$('#fh5co-home .to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var exploreAnimate = function() {
-
-		var explore = $('#fh5co-explore');
-		if ( explore.length > 0 ) {	
-
-			explore.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						explore.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						explore.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInLeft animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 700);
-
-					setTimeout(function() {
-						explore.find('.to-animate-3').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInRight animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 1000);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var testimonyAnimate = function() {
-		var testimony = $('#fh5co-testimony');
-		if ( testimony.length > 0 ) {	
-
-			testimony.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						testimony.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var gettingStartedAnimate = function() {
-		var started = $('.getting-started-1');
-		if ( started.length > 0 ) {	
-
-			started.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						started.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						started.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInRight animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var gettingStarted2Animate = function() {
-		var started = $('.getting-started-2');
-		if ( started.length > 0 ) {	
-
-			started.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						started.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						started.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInRight animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var pricingAnimate = function() {
-		var pricing = $('#fh5co-pricing');
-		if ( pricing.length > 0 ) {	
-
-			pricing.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					setTimeout(function() {
-						pricing.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						pricing.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-
-	var servicesAnimate = function() {
-		var services = $('#fh5co-services');
-		if ( services.length > 0 ) {	
-
-			services.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-
-					var sec = services.find('.to-animate').length,
-						sec = parseInt((sec * 200) + 400);
-
-					setTimeout(function() {
-						services.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						services.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('bounceIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, sec);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-
-	var teamAnimate = function() {
-		var team = $('#fh5co-team');
-		if ( team.length > 0 ) {	
-
-			team.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-					var sec = team.find('.to-animate').length,
-						sec = parseInt((sec * 200) + 400);
-
-					setTimeout(function() {
-						team.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						team.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, sec);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
+		} , { offset: '85%' } );
 	};
 
 	
-	var faqAnimate = function() {
-		var faq = $('#fh5co-faq');
-		if ( faq.length > 0 ) {	
 
-			faq.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-					var sec = faq.find('.to-animate').length,
-						sec = parseInt((sec * 200) + 400);
-						
-					setTimeout(function() {
-						faq.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						faq.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeInUp animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, sec);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var trustedAnimate = function() {
-		var trusted = $('#fh5co-trusted');
-		if ( trusted.length > 0 ) {	
-
-			trusted.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-					var sec = trusted.find('.to-animate').length,
-						sec = parseInt((sec * 200) + 400);
-						
-					setTimeout(function() {
-						trusted.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					setTimeout(function() {
-						trusted.find('.to-animate-2').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('bounceIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, sec);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-
-	var footerAnimate = function() {
-		var footer = $('#fh5co-footer');
-		if ( footer.length > 0 ) {	
-
-			footer.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-					setTimeout(function() {
-						footer.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-	var footerAnimate = function() {
-		var footer = $('#fh5co-footer');
-		if ( footer.length > 0 ) {	
-
-			footer.waypoint( function( direction ) {
-										
-				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-
-					setTimeout(function() {
-						footer.find('.to-animate').each(function( k ) {
-							var el = $(this);
-							
-							setTimeout ( function () {
-								el.addClass('fadeIn animated');
-							},  k * 200, 'easeInOutExpo' );
-							
-						});
-					}, 200);
-
-					
-					$(this.element).addClass('animated');
-						
-				}
-			} , { offset: '80%' } );
-
-		}
-	};
-
-
-	// Document on load.
+	
 	$(function(){
-
-		parallax();
+		fullHeight();
+		centerBlock();
+		responseHeight()
+		mobileMenuOutsideClick();
+		offcanvasMenu();
 		burgerMenu();
-		clickMenu();
-		windowScroll();
-		navigationSection();
-		testimonialCarousel();
-		
-		// Animations
-		homeAnimate();
-		exploreAnimate();
-		testimonyAnimate();
-		gettingStartedAnimate();
-		gettingStarted2Animate();
-		pricingAnimate();
-		servicesAnimate();
-		teamAnimate();
-		faqAnimate();
-		trustedAnimate();
-		footerAnimate();
-		
-
+		toggleBtnColor();
+		contentWayPoint();
 	});
 
 
