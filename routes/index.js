@@ -5,7 +5,6 @@ var dotenv = require('dotenv');
 dotenv.config();
 
 router.get('/',function(req,res,next){
-    console.log(process.env.API_KEY)
   res.redirect('/home');
 });
 
@@ -45,7 +44,7 @@ router.post('/contact',function(req,res,next){
         to: req.body.email,
         from: "justblankb@gmail.com",
         subject: req.body.subject,
-        text: req.body.body,
+        text:"Thank you for choosing us.",
     };
     sgMail.send(msg2);
     res.send("<html><link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'><script>alert('Please check your email..!!')</script><a href='http://localhost:3000/'><i class='material-icons'>arrow_back</i></a></html>");
