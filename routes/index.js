@@ -22,7 +22,7 @@ router.get('/objectives', function(req, res, next) {
  	res.render('objectives');
 });
 router.get('/contact', function(req, res, next) {
- 	res.render('contact');
+ 	res.render('contact',{msg:""});
 });
 router.get('/legality',function(req,res,next){
 	res.render('legality');
@@ -48,7 +48,7 @@ router.post('/contact',function(req,res,next){
         text:"Hello,"+req.body.fname+" "+req.body.lname+".Thank you for choosing us.",
     };
     sgMail.send(msg2);
-    res.send("<html><link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'><script>alert('Please check your email..!!')</script><a href='http://localhost:3000/'><i class='material-icons'>arrow_back</i></a></html>");
+    res.render("contact",{msg:"Your message has been sent."});
     });
 
 module.exports = router;

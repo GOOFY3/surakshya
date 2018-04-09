@@ -4,7 +4,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Surakshya Secuirity Services</title>
+	<title>Surakshya Security Services</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -105,12 +105,13 @@
 
       </div>
       <div class="col-lg-8">
+        <p style="color: red"><%- msg %></p>
           <h2 style="text-align:center">Contact Us</h2>
           <form action="/contact" method="POST">
             <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+            <input type="text" id="fname" name="fname" placeholder="Your name.." required>
             <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+            <input type="text" id="lname" name="lname" placeholder="Your last name.." required>
 
             <label for="email">Email</label><br>
             <input type="email" id="email" name="email" placeholder="Enter your email address.." style="width:99%" required><br><br>
