@@ -34,15 +34,16 @@ router.get('/gallery',function(req,res,next){
 router.post('/contact',function(req,res,next){
     sgMail.setApiKey(process.env.API_KEY);
     const msg = {
-        to: "justblankb@gmail.com",
+        to: "surakshya.pvt.ltd@gmail.com",
         from: req.body.email,
         subject:"("+req.body.fname+" "+req.body.lname+")"+req.body.subject,
         text: req.body.body,
     };
+    console.log(req.body.attachment);
     sgMail.send(msg);
     const msg2 = {
         to: req.body.email,
-        from: "justblankb@gmail.com",
+        from: "surakshya.pvt.ltd@gmail.com",
         subject: req.body.subject,
         text:"Hello,"+req.body.fname+" "+req.body.lname+".Thank you for choosing us.",
     };
