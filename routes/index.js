@@ -39,7 +39,6 @@ router.post('/contact',function(req,res,next){
         subject:"("+req.body.fname+" "+req.body.lname+")"+req.body.subject,
         text: req.body.body,
     };
-    console.log(req.body.attachment);
     sgMail.send(msg);
     const msg2 = {
         to: req.body.email,
