@@ -47,7 +47,7 @@ router.post('/contact',function(req,res,next){
         text:"Hello,"+req.body.fname+" "+req.body.lname+".Thank you for choosing us.",
     };
     sgMail.send(msg2);
-    res.render("contact",{msg:"Your message has been sent."});
+    res.render("contact",{msg:"Your message has been sent..!"});
     });
 
 module.exports = router;
