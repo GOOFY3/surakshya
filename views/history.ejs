@@ -46,9 +46,9 @@
 	<body>
     <div id="fh5co-page">
   	<header id="fh5co-header" role="banner">
-  		<div class="container">
+  		<div class="container-fluid">
   			<div class="header-inner">
-  				<h1><i class="sl-icon-energy"></i><a href="home">Surakshya</a></h1>
+  				<h1><i class="sl-icon-energy"></i>Surakshya</a></h1>
   				<nav role="navigation">
   					<ul>
   						<li><a href="home">Home</a></li>
@@ -65,6 +65,8 @@
   	</header>
     <br>
     <br>
+		<%- include carousel.ejs %>
+		<br>
 
 
     <div class="container">
@@ -75,16 +77,17 @@
       <br>
       <br>
       <div class="row">
-      <div class="col-md-3">
-      </div>
-      <div class="col-md-3" style="background:#D5E9FF">
+
+      <div class="col-md-6" style="background:#D5E9FF">
+				<img src="/images/user.png" style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
       <p style="text-align:justify">
   		The <b>Surakshya</b> security was launched in 2018 as ambitious dreams of Mr. Sumant Kumar Jena.and Mr. Pradeep kumar Singh.
       <br>
       From then, under his astute leadership and guidance the company has gone up from the scratch to becoming the leading security providers in the country today.
     </p>
     </div>
-  <div class="col-md-3">
+  <div class="col-md-6">
+		<img src="/images/user.png" style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
     <p class="card-text" style="text-align:justify">
       We strive to provide with a peace of mind through unbeatable security services, tailored to suit our client’s needs.
   		Our mission is to be a market leader by perfecting the perfection by defining total security parameters and
@@ -92,12 +95,11 @@
   		We retain our competitive edge through updates and advancement of our professionals by constant trainings to enhance our client’s safety.
     </p>
   </div>
-  <div class="col-md-3">
   </div>
   </div>
-  <div class="card" style="height:220px">
-  </div>
-  </div>
+	<br>
+	<br>
+	<%- include footer.ejs %>
 
 
 

@@ -45,30 +45,30 @@
 	</head>
 	<body>
     <div id="fh5co-page">
-  	<header id="fh5co-header" role="banner">
-  		<div class="container">
-  			<div class="header-inner">
-  				<h1><i class="sl-icon-energy"></i><a href="home">Surakshya</a></h1>
-  				<nav role="navigation">
-  					<ul>
-  						<li><a href="home">Home</a></li>
-  						<li><a href="history" href="history">Our History</a></li>
-  						<li><a class="active">Services</a></li>
-  						<li><a href="objectives">Our Objectives</a></li>
-  						<li><a href="legality">Legality</a></li>
-  						<li><a href="gallery">Gallery</a></li>
-  						<li><a href="contact">Contact Us</a></li>
-  					</ul>
-  				</nav>
-  			</div>
-  		</div>
-  	</header>
+			<header id="fh5co-header" role="banner">
+			    <div class="container-fluid">
+			      <div class="header-inner">
+			        <h1><i class="sl-icon-energy"></i>Surakshya</a></h1>
+			        <nav role="navigation">
+			          <ul>
+			            <li><a href="home">Home</a></li>
+			            <li><a href="history">Our History</a></li>
+			            <li><a class="active">Services</a></li>
+			            <li><a href="objectives">Our Objectives</a></li>
+			            <li><a href="legality">Legality</a></li>
+			            <li><a href="gallery">Gallery</a></li>
+			            <li><a href="contact">Contact Us</a></li>
+			          </ul>
+			        </nav>
+			      </div>
+			    </div>
+			</header>
+
     <br>
     <br>
-
-
-    <div class="container" >
-      <p style="text-align:center;color:black;font-size:30px"><b>Our Services</b></p>
+    <div class="container-fluid" style="background-color:#D9E0E7">
+			<%- include carousel.ejs %>
+			<p style="text-align:center;color:black;font-size:30px"><b>Our Services</b></p>
       <div class="card-deck">
         <div class="card">
           <div class="card-body">
@@ -141,7 +141,12 @@
           </div>
         </div>
       </div>
+			<br>
+			<br>
   </div>
+	<br>
+	<br>
+	<%- include footer.ejs %>
 
 
 

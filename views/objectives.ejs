@@ -46,9 +46,9 @@
 	<body>
     <div id="fh5co-page">
   	<header id="fh5co-header" role="banner">
-  		<div class="container">
+  		<div class="container-fluid">
   			<div class="header-inner">
-  				<h1><i class="sl-icon-energy"></i><a href="home">Surakshya</a></h1>
+  				<h1><i class="sl-icon-energy"></i>Surakshya</a></h1>
   				<nav role="navigation">
   					<ul>
   						<li><a href="home">Home</a></li>
@@ -67,73 +67,26 @@
     <br>
 
 
-    <div class="container" >
-      <p style="text-align:center;color:black;font-size:30px"><b>Our Objectives</b></p>
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>I</h1></b>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p class="card-text" style="text-align:justify">To give a goodnight sleep to our clients by ensuring their safety.</p>
-            <p class="card-text" style="color:#94b3d3"><small class="text-muted">Surakshya</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>II</h1></b>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p class="card-text" style="text-align:justify">To offer reliable, cost effective security services to our customers.</p>
-            <p class="card-text" style="color:#94b3d3" ><small class="text-muted">Surakshya</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>III</h1></b>
-            <p class="card-text" style="text-align:justify">Provided trusted security services with unmatched excellence and integrity to a number    
-              of clients ranging from large multinational corporations, banks and ATMs, offices, factories, hotels, industrial construction sites,
-              warehouses, residences, shops, export houses, government establishment and many more</p>
-            <p class="card-text" style="color:#94b3d3"><small class="text-muted">Surakshya</small></p>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>IV</h1></b>
-            <p class="card-text" style="text-align:justify">Our commitment and highest standard of service ensure security for you, your loved ones and associates, property and assets, 24 hours a day,
-               365 days a year.</p>
-            <p class="card-text" style="color:#94b3d3"><b><small class="text-muted">Surakshya</small></p></b>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>V</h1></b>
-            <p class="card-text" style="text-align:justify"> To be run by highly experienced and well trained professionals from defense force.</p>
-            <br>
-            <br>
-            <p class="card-text" style="color:#94b3d3"><small class="text-muted">Surakshya</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title" style="text-align:center;color:#768FA9;font-size:30px"><b>VI</h1></b>
-            <p class="card-text" style="text-align:justify">Providing culture of discipline, responsibility, integrity and always putting the client’s interests first. </p>
-            <br>
-            <br>
-            <p class="card-text" style="color:#94b3d3"><small class="text-muted">Surakshya</small></p>
-          </div>
-        </div>
-      </div>
-  </div>
+    <div class="container-fluid" >
+			<%- include carousel.ejs %>
+			<p style="text-align:center;color:black;font-size:30px"><b>Our Objectives</b></p>
+			<div class = "objectives" style="text-align:justify; font-size:20px">
+				<ol>
+					<li>To give a goodnight sleep to our clients by ensuring their safety</li><br>
+					<li>To offer reliable, cost effective security services to our customers.</li><br>
+					<li>Provided trusted security services with unmatched excellence and integrity to a number    of clients ranging from large multinational corporations, banks and ATMs, offices, factories, hotels, industrial
+						construction sites, warehouses, residences, shops, export houses, government establishment and many more.</li><br>
+					<li>Our commitment and highest standard of service ensure security for you, your loved ones and associates, property and assets,
+						24 hours a day, 365 days a year.</li><br>
+					<li>To be run by highly experienced and well trained professionals from defense force.</li><br>
+					<li>Providing culture of discipline, responsibility, integrity and always putting the client’s interests first.  
+					</li>
+				</ol>
+			</div>
+		</div>
+		<br>
+		<br>
+		<%- include footer.ejs %>
 
 
 
