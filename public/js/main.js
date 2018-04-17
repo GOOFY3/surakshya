@@ -1,5 +1,5 @@
 ;(function () {
-	
+
 	'use strict';
 
 
@@ -48,7 +48,7 @@
 		setTimeout(function(){
 			$('.js-responsive > .v-align').css('height', $('.js-responsive > img').height());
 		}, 1);
-		
+
 		$(window).resize(function(){
 			setTimeout(function(){
 				$('.js-responsive > .v-align').css('height', $('.js-responsive > img').height());
@@ -67,10 +67,10 @@
 
     			$('body').removeClass('offcanvas-visible');
     			$('.js-fh5co-nav-toggle').removeClass('active');
-				
+
 	    	}
-	    
-	    	
+
+
 	    }
 		});
 
@@ -114,7 +114,7 @@
 
 
 	var toggleBtnColor = function() {
-		if ( $('#fh5co-hero').length > 0 ) {	
+		if ( $('#fh5co-hero').length > 0 ) {
 			$('#fh5co-hero').waypoint( function( direction ) {
 				if( direction === 'down' ) {
 					$('.fh5co-nav-toggle').addClass('dark');
@@ -125,7 +125,7 @@
 				if( direction === 'up' ) {
 					$('.fh5co-nav-toggle').removeClass('dark');
 				}
-			} , { 
+			} , {
 				offset:  function() { return -$(this.element).height() + 0; }
 			} );
 		}
@@ -138,7 +138,7 @@
 		$('.animate-box').waypoint( function( direction ) {
 
 			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-				
+
 				i++;
 
 				$(this.element).addClass('item-animate');
@@ -161,17 +161,17 @@
 							el.removeClass('item-animate');
 						},  k * 200, 'easeInOutExpo' );
 					});
-					
+
 				}, 100);
-				
+
 			}
 
 		} , { offset: '85%' } );
 	};
 
-	
 
-	
+
+
 	$(function(){
 		fullHeight();
 		centerBlock();
@@ -185,3 +185,24 @@
 
 
 }());
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
